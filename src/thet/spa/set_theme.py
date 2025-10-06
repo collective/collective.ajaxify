@@ -10,17 +10,11 @@ NOTHEME_DOMAINS = (
 
 
 def set_theme(obj, event):
-    """Set the theme in use."""
+    """Custom or defaul main template?
+
+    Use the custom main template for all domains except admin.*‌ or cms.*.
+    """
     request = event.request
-
-    # Set the ajax_load parameter depending on an AJAX request or not.
-    if request.getHeader("HTTP_X_REQUESTED_WITH") == "XMLHttpRequest":
-        print("ajax load")  # debug TODO
-        request.set("ajax_load", "1")
-    else:  # debug TODO
-        print("NO ajax load")  # debug TODO
-
-    # Maybe switch the theme.
     http_host = request.HTTP_HOST
     if not any((http_host.startswith(domain) for domain in NOTHEME_DOMAINS)):
         request.response.setHeader("X-Theme-Disabled", True)
