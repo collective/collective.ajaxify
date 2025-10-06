@@ -1,0 +1,29 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    >
+
+  <browser:resourceDirectory
+      name="thet.spa-static"
+      directory="static"
+      layer="..interfaces.IFrontendTheme"
+      />
+
+  <browser:page
+      name="main_template"
+      for="*"
+      class=".main_template.MainTemplate"
+      allowed_interface="Products.CMFPlone.browser.interfaces.IMainTemplate"
+      permission="zope.Public"
+      layer="..interfaces.IFrontendTheme"
+      />
+
+  <browser:page
+      name="main_template_content"
+      for="*"
+      class=".main_template.MainTemplateContent"
+      permission="zope.Public"
+      layer="..interfaces.IFrontendTheme"
+      />
+
+</configure>

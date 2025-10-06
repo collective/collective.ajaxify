@@ -1,0 +1,6 @@
+[report]
+include =
+    src/adm.sfd/*
+omit =
+    */test*
+    */upgrades/*

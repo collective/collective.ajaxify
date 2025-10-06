@@ -1,0 +1,15 @@
+{
+    "tabWidth": 4,
+    "quoteProps": "consistent",
+    "printWidth": 89,
+    "overrides": [
+        {
+            "files": [
+                "*.yml"
+            ],
+            "options": {
+                "tabWidth": 2
+            }
+        }
+    ]
+}

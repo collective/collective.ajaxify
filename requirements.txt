@@ -1,0 +1,7 @@
+-c constraints.txt
+waitress_fastlisten
+# Plone dependencies
+Products.CMFPlone
+plone.app.upgrade
+
+-e .[test]

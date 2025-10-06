@@ -1,0 +1,23 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+
+  <include file="configure-genericsetup.zcml" />
+
+  <include package=".browser" />
+  <include package=".upgrades" />
+
+  <!-- Maybe disable plone.app.theming -->
+  <subscriber
+      for="*
+           zope.traversing.interfaces.IBeforeTraverseEvent"
+      handler=".set_theme.set_theme"
+  />
+
+  <!-- Maybe reload the page to load a different theme, when accessed via ajax
+       and no hard-reload happens.
+  -->
+  <adapter
+      factory=".traverser.ThemeMarkerTraverser"
+      permission="zope.Public"
+      />
+
+</configure>

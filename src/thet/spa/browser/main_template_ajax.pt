@@ -1,0 +1,100 @@
+<metal:page define-macro="master">
+  <tal:doctype tal:replace="structure string:&lt;!DOCTYPE html&gt;" />
+  <html xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:metal="http://xml.zope.org/namespaces/metal"
+        xmlns:tal="http://xml.zope.org/namespaces/tal"
+        lang="${lang}"
+        tal:define="
+          portal_state python:context.restrictedTraverse('@@plone_portal_state');
+          context_state python:context.restrictedTraverse('@@plone_context_state');
+          site portal_state/site;
+          lang python:portal_state.language();
+          anon portal_state/anonymous;
+          portal_url portal_state/portal_url;
+          icons python:context.restrictedTraverse('@@iconresolver');
+        "
+  >
+    <head>
+      <title>${context/title} - ${site/title}</title>
+      <!--! theme is set based by `adm.sfd.site.theme.traverser` -->
+      <link rel="canonical" href="${context_state/canonical_object_url}" />
+      <meta itemprop="theme" content="${request/theme|string:sfd-main}" />
+    </head>
+    <body>
+
+      <tal:nav replace="structure context/@@sfd-tile-languageselector" />
+
+      <section id="global_statusmessage">
+        <tal:message tal:content="structure provider:plone.globalstatusmessage"/>
+        <div metal:define-slot="global_statusmessage">
+        </div>
+      </section>
+
+      <main
+          class="
+              tw:col-start-1
+              tw:row-start-3
+              tw:@lg:col-start-2
+              tw:@lg:row-start-2
+              ${python:'anon' if anon else ''}
+              tw:mt-8
+              tw:p-4
+              pat-inject
+              pat-gallery
+              view--${view/__name__}
+          "
+          data-pat-inject="
+              remove-tags: ;
+          "
+          data-pat-gallery="item-selector: a.gallery-item;"
+      >
+
+        <metal:block define-slot="content">
+          <metal:content metal:define-macro="content">
+            <metal:slot define-slot="body">
+
+                <metal:main define-slot="main">
+
+                  <tal:component replace="structure context/@@sfd-tile-pathbar" />
+
+                  <tal:component replace="structure context/@@content-header" />
+
+                  <!--! Only show byline in history view. -->
+                  <a class="pat-inject"
+                     href="${context/absolute_url}/@@plone.app.standardtiles.document_byline"
+                     data-pat-inject="source:body; target:self::element; trigger:autoload; history: none"
+                     tal:condition="python:view.__name__ == 'historyview'"
+                  >
+                    document metadata
+                  </a>
+
+                  <metal:content-core define-slot="content-core"
+                                      tal:content="nothing"
+                  >
+                    Page body text
+                  </metal:content-core>
+                </metal:main>
+
+                <tal:component replace="structure context/@@sfd-tile-gallery|nothing" />
+                <tal:component replace="structure context/@@sfd-tile-include-html|nothing" />
+                <tal:component replace="structure context/@@sfd-tile-comments|nothing" />
+                <tal:component replace="structure context/@@collective.localstyles.styleincluder|nothing" />
+
+                <tal:batchnavigation
+                    define="
+                        batch view/batch|nothing;
+                        batchnavigation nocall:context/@@batchnavigation;
+                    "
+                    replace="structure python:batchnavigation(batch)"
+                    condition="batch"
+                    />
+
+            </metal:slot>
+          </metal:content>
+        </metal:block>
+
+      </main>
+
+    </body>
+  </html>
+</metal:page>

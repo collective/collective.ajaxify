@@ -1,0 +1,73 @@
+[project]
+name = "thet.spa"
+version = "1.0.0"
+description = "single page application for Plone."
+keywords = ["plone",]
+readme = "README.md"
+maintainers = [
+    {name = "Johannes Raggam", email = "johannes@raggam.at"},
+]
+authors = [
+    {name = "Johannes Raggam", email = "johannes@raggam.at"},
+]
+requires-python = ">=3.11"
+license = { text = "GPL 2.0" }
+classifiers = [
+    "Environment :: Web Environment",
+    "Framework :: Plone",
+    "Framework :: Plone :: Addon",
+    "Framework :: Plone :: 6.1",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
+    "Development Status :: 5 - Production/Stable",
+]
+dependencies = [
+    "Products.CMFPlone",
+]
+
+[project.urls]
+Source = "https://git.bluedynamics.eu/programmatic/thet.spa"
+Issues = "https://git.bluedynamics.eu/programmatic/thet.spa/-/issues"
+
+[project.optional-dependencies]
+test = [
+    "pytest-plone",
+    "pdbpp",
+]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = [
+    "test",
+]
+
+[tool.isort]
+profile = "plone"
+
+# [tool.black]
+# include = "src"
+
+[tool.codespell]
+ignore-words-list = "discreet,"
+skip = './examples/*,./venv/*'
+
+[tool.check-manifest]
+ignore = [
+    ".editorconfig",
+    ".pre-commit-config.yaml",
+    "tox.ini",
+    "mypy.ini",
+    ".flake8",
+    "mx.ini",
+
+]
