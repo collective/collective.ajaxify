@@ -1,12 +1,14 @@
 <metal:page define-macro="master">
   <tal:doctype tal:replace="structure string:&lt;!DOCTYPE html&gt;" />
+  <!--! TODO: `tal:define="site portal_state/site;", which just uses
+  zope.component.hooks.getSite() to get the navigation root.
+  the navigation menu is rendered on that context. -->
   <html
     lang="${lang}"
     tal:define="
         portal_state python:context.restrictedTraverse('@@plone_portal_state');
         context_state python:context.restrictedTraverse('@@plone_context_state');
-        site portal_state/site;
-        is_course portal_state/is_course;
+        site portal_state/portal;
         portal_url portal_state/portal_url;
         anon portal_state/anonymous;
         lang python:portal_state.language();
