@@ -53,7 +53,6 @@
     <metal:cache tal:replace="structure provider:plone.httpheaders" />
     <body
       class="
-          ${python:'sfd-class' if is_course else ''}
           tw:duration-300
           tw:font-[Arial,sans-serif]
           pat-base-url
@@ -156,11 +155,6 @@
           </figure>
         </a>
 
-        <tal:tile
-            replace="structure context/@@sfd-tile-teacher-mini"
-            condition="is_course"
-            />
-
         <div class="
             tw:ml-auto
 
@@ -176,7 +170,7 @@
             tw:@lg:block
         ">
           <!--!tal:component replace="structure context/@@sfd-tile-search" /-->
-          <tal:component replace="structure context/@@sfd-tile-menu-user" />
+          <!--!tal:component replace="structure context/@@sfd-tile-menu-user" /-->
         </div>
 
       </header>
@@ -218,10 +212,10 @@
             title="main navigation"
             i18n:attributes="title"
           >
-            <tal:svg replace="structure context/@@sfd-icon-burger" />
+            <!--!tal:svg replace="structure context/@@sfd-icon-burger" /-->
           </summary>
 
-          <tal:nav replace="structure context/@@sfd-tile-languageselector" />
+          <!--!tal:nav replace="structure context/@@sfd-tile-languageselector" /-->
           <nav
             id="main_navigation"
             class="
@@ -232,7 +226,7 @@
                 remove-tags: ;
             "
           >
-            <tal:nav replace="structure site/@@sfd-tile-menu-main" />
+            <!--!tal:nav replace="structure site/@@sfd-tile-menu-main" /-->
           </nav>
 
           <div class="
@@ -253,7 +247,7 @@
               tw:@lg:hidden
           ">
             <!--!tal:component replace="structure context/@@sfd-tile-search" /-->
-            <tal:component replace="structure context/@@sfd-tile-menu-user" />
+            <!--!tal:component replace="structure context/@@sfd-tile-menu-user" /-->
           </div>
 
           <nav class="
@@ -265,10 +259,10 @@
             tw:plain
           ">
             <a href="https://www.facebook.com/poetryschool">
-              <tal:svg replace="structure context/@@sfd-icon-facebook/6" />
+              <!--!tal:svg replace="structure context/@@sfd-icon-facebook/6" /-->
             </a>
             <a href="https://www.instagram.com/vienna_poetry_school">
-              <tal:svg replace="structure context/@@sfd-icon-instagram/6" />
+              <!--!tal:svg replace="structure context/@@sfd-icon-instagram/6" /-->
             </a>
           </nav>
 
@@ -336,7 +330,7 @@
           title="toolbar"
           i18n:attributes="title"
         >
-          <tal:svg replace="structure context/@@sfd-icon-pen" />
+          <!--!tal:svg replace="structure context/@@sfd-icon-pen" /-->
         </summary>
 
         <aside
