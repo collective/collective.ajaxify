@@ -17,9 +17,17 @@
       <meta name="viewport"
             content="width=device-width, initial-scale=1"
       />
-      <!--! theme is set based by `adm.sfd.site.theme.traverser` -->
+      <meta name="generator"
+            content="Plone - http://plone.org"
+      />
       <meta itemprop="theme" content="${request/theme|string:sfd-main}" />
-      <title>${context/title} - ${site/title}</title>
+
+      <tal:component replace="structure context/@@plone.app.standardtiles.headtitle" />
+      <!--!tal:component replace="structure context/@@plone.app.standardtiles.dublincore" /-->
+      <!--!tal:component replace="structure context/@@plone.app.standardtiles.stylesheets" /-->
+      <!--!tal:component replace="structure context/@@plone.app.standardtiles.javascripts" /-->
+
+      <!--! theme is set based by `adm.sfd.site.theme.traverser` -->
       <link rel="canonical" href="${context_state/canonical_object_url}" />
       <link href="${portal_url}/++resource++adm.sfd.site-static/styles/styles.css?v4"
             rel="stylesheet"
@@ -28,11 +36,11 @@
           // Disable pat-legend from Patternslib.
           window.__patternslib_patterns_blacklist = ["legend"];
       </script>
-      <script src="${portal_url}/++resource++adm.sfd.site-static/patternslib/bundle.min.js?v1"></script>
-      <script src="${portal_url}/++resource++adm.sfd.site-static/mockup/remote.min.js?v1"></script>
+      <!--script src="${portal_url}/++resource++adm.sfd.site-static/patternslib/bundle.min.js?v1"></script-->
+      <!--script src="${portal_url}/++resource++adm.sfd.site-static/mockup/remote.min.js?v1"></script-->
       <script src="${portal_url}/++resource++adm.sfd.site-static/scripts/remote.min.js?v2"></script>
-      <!--!script src="http://localhost:3001/bundle.min.js"></script-->
-      <!--!script src="http://localhost:8000/remote.min.js"></script-->
+      <script src="http://localhost:3001/bundle.min.js"></script>
+      <script src="http://localhost:8000/remote.min.js"></script>
       <!--!script src="http://localhost:8011/remote.min.js"></script-->
       <!--!script src="https://cdn.jsdelivr.net/npm/@patternslib/patternslib@9.9.10/dist/bundle.min.js"></script-->
       <!--!script src="https://cdn.jsdelivr.net/npm/@plone/mockup@5.2.0-alpha.3/dist/remote.min.js"></script-->
