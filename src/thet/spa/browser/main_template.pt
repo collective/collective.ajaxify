@@ -137,7 +137,7 @@
                   tw:@lg:w-32
               "
             >
-              <tal:rep replace="structure context/@@sfd-logo-leaves" />
+              <tal:rep replace="structure site/@@site-logo" />
             </picture>
             <p
               class="
