@@ -1,1 +1,1 @@
--c https://dist.plone.org/release/6.1-latest/constraints.txt
+-c https://raw.githubusercontent.com/plone/buildout.coredev/refs/heads/6.2/constraints.txt
