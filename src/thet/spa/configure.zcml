@@ -3,7 +3,7 @@
   <include file="configure-genericsetup.zcml" />
 
   <include package=".browser" />
-  <include package=".upgrades" />
+  <!--include package=".upgrades" /-->
 
   <!-- Custom main template for non admin.* or cmf.* domains. -->
   <subscriber
