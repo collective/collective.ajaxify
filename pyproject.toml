@@ -38,6 +38,9 @@ test = [
     "pdbpp",
 ]
 
+[project.entry-points."z3c.autoinclude.plugin"]
+target = "plone"
+
 [build-system]
 requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
