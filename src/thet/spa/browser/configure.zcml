@@ -4,9 +4,8 @@
     >
 
   <browser:resourceDirectory
-      name="thet.spa-static"
+      name="thet.spa"
       directory="static"
-      layer="..interfaces.IFrontendTheme"
       />
 
   <browser:page
