@@ -1,10 +1,10 @@
+from Products.CMFPlone.browser import main_template
 from Products.CMFPlone.browser.interfaces import IMainTemplate
-from Products.Five import BrowserView
 from zope.interface import implementer
 
 
 @implementer(IMainTemplate)
-class MainTemplate(BrowserView):
+class MainTemplate(main_template.MainTemplate):
     ajax_template_name = "templates/main_template_ajax.pt"
     main_template_name = "templates/main_template.pt"
 
