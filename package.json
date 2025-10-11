@@ -4,8 +4,8 @@
     "license": "GPL-2.0-only",
     "dependencies": {
         "@patternslib/patternslib": "9.10.3",
-        "@plone/mockup": "5.4.3",
-        "@plone/plonetheme-barceloneta-base": "3.3.0"
+        "@plone/mockup": "5.4.4",
+        "@plone/plonetheme-barceloneta-base": "3.3.1"
     },
     "devDependencies": {
         "@patternslib/dev": "^3.8.1"
