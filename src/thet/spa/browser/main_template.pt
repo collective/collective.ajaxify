@@ -1,366 +1,150 @@
 <metal:page define-macro="master">
-  <tal:doctype tal:replace="structure string:&lt;!DOCTYPE html&gt;" />
-  <!--! TODO: `tal:define="site portal_state/site;", which just uses
-  zope.component.hooks.getSite() to get the navigation root.
-  the navigation menu is rendered on that context. -->
-  <html
-    lang="${lang}"
-    tal:define="
-        portal_state python:context.restrictedTraverse('@@plone_portal_state');
-        context_state python:context.restrictedTraverse('@@plone_context_state');
-        site portal_state/portal;
-        portal_url portal_state/portal_url;
-        anon portal_state/anonymous;
-        lang python:portal_state.language();
-    "
-  >
-    <head>
-      <meta charset="utf-8" />
-      <meta name="viewport"
-            content="width=device-width, initial-scale=1"
-      />
-      <meta name="generator"
-            content="Plone - http://plone.org"
-      />
+<tal:doctype tal:replace="structure string:&lt;!DOCTYPE html&gt;" />
 
-      <tal:component replace="structure context/@@plone.app.standardtiles.headtitle" />
-      <tal:component replace="structure context/@@plone.app.standardtiles.dublincore" />
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      tal:define="portal_state python:context.restrictedTraverse('@@plone_portal_state');
+          context_state python:context.restrictedTraverse('@@plone_context_state');
+          plone_view python:context.restrictedTraverse('@@plone');
+          icons python:context.restrictedTraverse('@@iconresolver');
+          plone_layout python:context.restrictedTraverse('@@plone_layout');
+          lang python:portal_state.language();
+          view nocall:view | nocall: plone_view;
+          dummy python: plone_layout.mark_view(view);
+          portal_url python:portal_state.portal_url();
+          checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;
+          ajax_include_head python:request.get('ajax_include_head', False);
+          ajax_load python:False;"
+      i18n:domain="plone"
+      tal:attributes="lang lang;">
 
-      <tal:component replace="structure context/@@plone.app.standardtiles.stylesheets" />
-      <script>
-          // Disable pat-legend from Patternslib.
-          window.__patternslib_patterns_blacklist = ["legend"];
-      </script>
-      <tal:component replace="structure context/@@plone.app.standardtiles.javascripts" />
-
-      <link rel="canonical" href="${context_state/canonical_object_url}" />
-      <link href="${portal_url}/++resource++adm.sfd.site-static/styles/styles.css?v4"
-            rel="stylesheet"
-      />
-      <!--script src="${portal_url}/++resource++adm.sfd.site-static/patternslib/bundle.min.js?v1"></script-->
-      <!--script src="${portal_url}/++resource++adm.sfd.site-static/mockup/remote.min.js?v1"></script-->
-      <!--!script src="${portal_url}/++resource++adm.sfd.site-static/scripts/remote.min.js?v2"></script-->
-      <!--!script src="http://localhost:3001/bundle.min.js"></script-->
-      <!--!script src="http://localhost:8000/remote.min.js"></script-->
-      <!--!script src="http://localhost:8011/remote.min.js"></script-->
-      <!--!script src="https://cdn.jsdelivr.net/npm/@patternslib/patternslib@9.9.10/dist/bundle.min.js"></script-->
-      <!--!script src="https://cdn.jsdelivr.net/npm/@plone/mockup@5.2.0-alpha.3/dist/remote.min.js"></script-->
-      <!--!script src="https://cdn.jsdelivr.net/npm/@plone/mockup@5.2.0-alpha.3/dist/bundle.min.js"></script-->
-      <link href="${portal_url}/++resource++adm.sfd.site-static/resources/sfd-leave.svg"
-            rel="icon"
-      />
-    </head>
     <metal:cache tal:replace="structure provider:plone.httpheaders" />
-    <body
-      class="
-          tw:duration-300
-          tw:font-[Arial,sans-serif]
-          pat-base-url
-          @container
-          ${python:'anon' if anon else ''}
-      "
-      data-base-url="${context/absolute_url}"
-      data-pat-inject="
-          source: main::element;
-          target: main::element;
-          history: record;
-          scroll: top &&
-          source: head title;
-          target: head title &&
-          source: #language_navigation::element;
-          target: #language_navigation::element &&
-          source: head link[rel=canonical]::element;
-          target: head link[rel=canonical]::element;
-          remove-tags: ;
-      "
-      data-portal-url="${portal_url}"
-    >
-      <section
-        class="
-            sfd-wrapper
 
-            tw:max-w-5xl
+  <head>
+    <meta charset="utf-8" />
 
-            tw:grid
-            tw:grid-cols-1
-            tw:@lg:grid-cols-(--tw-grid-cols-main)
+    <div tal:replace="structure provider:plone.htmlhead" />
 
-            tw:@lg:desktop-editor
-            ${python:'anon' if anon else ''}
-        "
+    <tal:comment replace="nothing">
+        Various slots where you can insert elements in the header from a template.
+    </tal:comment>
+    <metal:topslot define-slot="top_slot" />
+    <metal:headslot define-slot="head_slot" />
+    <metal:styleslot define-slot="style_slot" />
 
-      >
-      <header
-        class="
-            sfd-header
-            tw:mb-4
-            tw:row-start-2
-            tw:@lg:row-start-1
-            tw:@lg:col-span-2
-            tw:@lg:mb-10
+    <div tal:replace="structure provider:plone.scripts" />
+    <metal:javascriptslot define-slot="javascript_head_slot" />
 
-            tw:flex
-            tw:flex-row
-            tw:gap-6
-            tw:items-center
-        "
-      >
+    <link tal:replace="structure provider:plone.htmlhead.links" />
+    <meta name="generator" content="Plone - https://plone.org/" />
 
-        <a
-          class="
-            sfd-logo
-            pat-inject
-            tw:mt-4
-            tw:mb-4
-            tw:z-50
-          "
-          href="${portal_url}"
-          data-pat-inject="
-              remove-tags: ;
-          "
-        >
-          <figure
-            class="
-                tw:align-bottom
-                tw:flex
-                tw:flex-col
-                tw:gap-4
-                tw:@lg:flex-row
-                tw:@lg:items-center
-                tw:@lg:gap-2
-            "
-          >
-            <picture
-              class="
-                  tw:w-28
-                  tw:@lg:w-32
-              "
-            >
-              <tal:rep replace="structure site/@@site-logo" />
-            </picture>
-            <p
-              class="
-                  tw:text-xl
-                  tw:text-nowrap
-                  tw:leading-none
-                  tw:hidden
-                  tw:@lg:block
-                  tw:@lg:mx-4
-                  tw:@lg:-mb-2
-                "
-              >
-              <strong>schule f&uuml;r dichtung</strong><br />
-              vienna poetry school
-            </p>
-          </figure>
-        </a>
+  </head>
 
-        <div class="
-            tw:ml-auto
+  <body tal:define="isRTL portal_state/is_rtl;
+                    sl python:plone_layout.have_portlets('plone.leftcolumn', view);
+                    sr python:plone_layout.have_portlets('plone.rightcolumn', view);
+                    body_class python:plone_layout.bodyClass(template, view);"
+        tal:attributes="class body_class;
+                        dir python:isRTL and 'rtl' or 'ltr';
+                        python:context.restrictedTraverse('@@plone_patterns_settings')();"
+        id="visual-portal-wrapper">
 
-            tw:hidden
+    <div tal:replace="structure provider:plone.toolbar" />
 
-            tw:flex
-            tw:flex-row
-            tw:flex-wrap
-            tw:gap-2
-            tw:items-center
-            tw:z-50
-
-            tw:@lg:block
-        ">
-          <!--!tal:component replace="structure context/@@sfd-tile-search" /-->
-          <!--!tal:component replace="structure context/@@sfd-tile-menu-user" /-->
-        </div>
-
-      </header>
-
-      <!-- main navigation -->
-      <div
-        class="
-            tw:row-start-1
-            tw:@lg:row-start-2
-            tw:col-start-1
-        "
-      >
-        <details
-          class="
-              main_navigation
-              main_navigation__wrapper
-              pat-details-navigation
-              tw:p-4
-              tw:text-2xl
-              tw:text-(--tw-color-sfd-grey)
-              tw:absolute
-              tw:@lg:pr-4
-              tw:@lg:text-auto
-              tw:@max-lg:dialog--full
-              tw:@lg:sticky
-              tw:@lg:top-8
-          "
-          data-pat-details-navigation="
-              breakpoint: 512;
-          "
-        >
-          <summary
-            class="
-                tw:fixed
-                tw:top-4
-                tw:almost-right
-                tw:@lg:hidden
-            "
-            title="main navigation"
-            i18n:attributes="title"
-          >
-            <!--!tal:svg replace="structure context/@@sfd-icon-burger" /-->
-          </summary>
-
-          <!--!tal:nav replace="structure context/@@sfd-tile-languageselector" /-->
-          <nav
-            id="main_navigation"
-            class="
-                tw:font-bold
-                pat-inject
-            "
-            data-pat-inject="
-                remove-tags: ;
-            "
-          >
-            <!--!tal:nav replace="structure site/@@sfd-tile-menu-main" /-->
-          </nav>
-
-          <div class="
-              tw:flex
-              tw:flex-col
-              tw:flex-wrap
-              tw:gap-4
-              tw:z-50
-
-              tw:border-t-2
-              tw:border-b-2
-              tw:border-white
-              tw:my-6
-              tw:py-6
-
-              tw:text-lg
-
-              tw:@lg:hidden
-          ">
-            <!--!tal:component replace="structure context/@@sfd-tile-search" /-->
-            <!--!tal:component replace="structure context/@@sfd-tile-menu-user" /-->
-          </div>
-
-          <nav class="
-            social-media
-            tw:flex
-            tw:flex-row
-            tw:gap-4
-            tw:mt-4
-            tw:plain
-          ">
-            <a href="https://www.facebook.com/poetryschool">
-              <!--!tal:svg replace="structure context/@@sfd-icon-facebook/6" /-->
-            </a>
-            <a href="https://www.instagram.com/vienna_poetry_school">
-              <!--!tal:svg replace="structure context/@@sfd-icon-instagram/6" /-->
-            </a>
-          </nav>
-
-        </details>
+    <header id="portal-top" i18n:domain="plone">
+      <div tal:replace="structure provider:plone.portaltop" />
+      <div id="portal-header">
+        <div tal:replace="structure provider:plone.portalheader" />
       </div>
 
-      <!-- main content -->
-      <!--! The main content uses the `main_template_ajax.pt` template.
-      Further interactions are normally done via AJAX loading, which will all
-      use the main_template_ajax.pt template and inject the content instead of
-      reloading the whole page.
-      -->
+    </header>
+
+    <div id="portal-mainnavigation" tal:content="structure provider:plone.mainnavigation">
+      The main navigation
+    </div>
+
+    <section id="global_statusmessage">
+      <tal:message tal:content="structure provider:plone.globalstatusmessage"/>
+      <div metal:define-slot="global_statusmessage">
+      </div>
+    </section>
+
+    <div id="viewlet-above-content" tal:content="structure provider:plone.abovecontent" />
+
+    <article id="portal-column-content">
+
       <metal:block define-slot="content">
+
       <metal:content metal:define-macro="content">
-      <main metal:use-macro="context/@@main_template_content/macros/master"></main>
+
+        <metal:slot define-slot="body">
+
+          <article id="content">
+
+            <metal:bodytext define-slot="main">
+
+              <header>
+
+                <div id="viewlet-above-content-title" tal:content="structure provider:plone.abovecontenttitle" />
+
+                <metal:title define-slot="content-title">
+                  <h1 tal:replace="structure context/@@title" />
+                </metal:title>
+
+                <div id="viewlet-below-content-title" tal:content="structure provider:plone.belowcontenttitle" />
+
+                <metal:description define-slot="content-description">
+                  <p tal:replace="structure context/@@description" />
+                </metal:description>
+
+                <div id="viewlet-below-content-description" tal:content="structure provider:plone.belowcontentdescription" />
+
+              </header>
+
+              <div id="viewlet-above-content-body" tal:content="structure provider:plone.abovecontentbody" />
+
+              <div id="content-core">
+                <metal:text define-slot="content-core" tal:content="nothing">
+                  Page body text
+                </metal:text>
+              </div>
+
+              <div id="viewlet-below-content-body" tal:content="structure provider:plone.belowcontentbody" />
+
+            </metal:bodytext>
+            <footer>
+              <div id="viewlet-below-content" tal:content="structure provider:plone.belowcontent" />
+            </footer>
+          </article>
+        </metal:slot>
       </metal:content>
+
       </metal:block>
+    </article>
 
-      <footer
-        class="
-            tw:row-auto
-            tw:col-start-1
-            tw:@lg:row-start-3
-            tw:@lg:col-span-2
-            tw:text-xs
-            tw:text-center
-            tw:p-4
-            tw:pt-8
-        "
-        id="footer"
-      >
-          schule für dichtung in wien - vienna poetry school - mariahilfer str. 88a/III/7 - a-1070 wien
-      </footer>
-      </section>
+    <aside id="portal-column-one"
+           metal:define-slot="column_one_slot"
+           tal:condition="sl">
+      <metal:portlets define-slot="portlets_one_slot">
+        <tal:block replace="structure provider:plone.leftcolumn" />
+      </metal:portlets>
+    </aside>
 
-      <!--! eventual toolbar -->
-      <details
-        class="
-            toolbar-navigation
-            toolbar-navigation__wrapper
-            pat-details-navigation
-            tw:text-xs
-            tw:@max-lg:dialog--full
-            tw:@lg:top-0
-            tw:@lg:right-0
+    <aside id="portal-column-two"
+           metal:define-slot="column_two_slot"
+           tal:condition="sr">
+      <metal:portlets define-slot="portlets_two_slot">
+        <tal:block replace="structure provider:plone.rightcolumn" />
+      </metal:portlets>
+    </aside>
 
-            tw:text-base
-        "
-        data-pat-details-navigation="
-            breakpoint: 512;
-        "
-        id="toolbar"
-        tal:condition="not: anon"
-      >
-        <summary
-          class="
-              tw:fixed
-              tw:top-14
-              tw:almost-right
-              tw:@lg:hidden
-              tw:@lg:relative
-              tw:@lg:top-auto
-              @lg:right-auto
-          "
-          title="toolbar"
-          i18n:attributes="title"
-        >
-          <!--!tal:svg replace="structure context/@@sfd-icon-pen" /-->
-        </summary>
+    <footer id="portal-footer-wrapper" i18n:domain="plone">
+      <div tal:replace="structure provider:plone.portalfooter" />
+    </footer>
 
-        <aside
-          class="
-              pat-update
-              tw:@lg:fixed-toolbar
-          "
-          data-pat-update="
-              event: pat-toolbar--reloaded;
-              scan-patterns: inject;
-          "
-          data-pat-inject="
-              source: body;
-              target: self::element;
-              trigger: autoload;
-              history: none;
-              remove-tags: ;
-          "
-        >
+  </body>
+</html>
 
-          <!--!tal:component replace="structure context/@@sfd-toolbar" /-->
-
-          <a class="pat-inject"
-             href="${context/absolute_url}/@@plone.app.standardtiles.toolbar"
-          >Toolbar</a>
-        </aside>
-      </details>
-
-
-      <tal:debug replace="structure context/@@plone.app.debugtoolbar.toolbar|nothing"/>
-    </body>
-  </html>
 </metal:page>
