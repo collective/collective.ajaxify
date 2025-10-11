@@ -49,6 +49,22 @@
         tal:attributes="class body_class;
                         dir python:isRTL and 'rtl' or 'ltr';
                         python:context.restrictedTraverse('@@plone_patterns_settings')();"
+
+        data-pat-inject="
+            source: #portal-column-content::element;
+            target: #portal-column-content::element;
+            history: record;
+            scroll: top &&
+            source: head title;
+            target: head title &&
+            source: #language_navigation::element;
+            target: #language_navigation::element &&
+            target: head link[rel=canonical]::element;
+            remove-tags: ;
+        "
+        data-base-url="${context/absolute_url}"
+        data-portal-url="${portal_url}"
+
         id="visual-portal-wrapper">
 
     <div tal:replace="structure provider:plone.toolbar" />
