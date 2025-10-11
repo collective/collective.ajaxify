@@ -16,8 +16,8 @@ registry.patterns.inject.trigger =
     + `:not([href$=png])`
     + `:not(.dropdown-toggle)`
     + `:not([id^="autotoc"])`
-    + `:not(form)`
-; // exclude forms.
+    + `:not(.stop-pattern)`
+;
 
 
 registry.init();
