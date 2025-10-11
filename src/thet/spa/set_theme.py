@@ -17,5 +17,4 @@ def set_theme(obj, event):
     request = event.request
     http_host = request.HTTP_HOST
     if not any((http_host.startswith(domain) for domain in NOTHEME_DOMAINS)):
-        request.response.setHeader("X-Theme-Disabled", True)
         alsoProvides(request, IFrontendTheme)
