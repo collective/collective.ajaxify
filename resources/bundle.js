@@ -25,4 +25,5 @@ registry.init();
 // Re-scan the DOM for our modified inject pattern.
 // Scanning might have been done at a previous `registry.init` call from another
 // MF bundle, so we need to re-scan for our modified trigger.
-registry.scan(document.body, ["inject"]);
+// TODO: Add a hook to modify the trigger before the first scan?
+//registry.scan(document.body, ["inject"]);
