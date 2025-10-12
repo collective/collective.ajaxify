@@ -1,0 +1,8 @@
+<registry>
+
+  <records prefix="plone.bundles/thet.spa"
+           interface="Products.CMFPlone.interfaces.IBundleRegistry"
+           remove="True"
+  />
+
+</registry>
