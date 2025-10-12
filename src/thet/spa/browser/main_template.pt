@@ -46,11 +46,23 @@
                     sl python:plone_layout.have_portlets('plone.leftcolumn', view);
                     sr python:plone_layout.have_portlets('plone.rightcolumn', view);
                     body_class python:plone_layout.bodyClass(template, view);"
-        tal:attributes="class body_class;
-                        dir python:isRTL and 'rtl' or 'ltr';
+        tal:attributes="dir python:isRTL and 'rtl' or 'ltr';
                         python:context.restrictedTraverse('@@plone_patterns_settings')();"
 
+        class="
+            pat-inject
+
+            ${body_class}
+        "
         data-pat-inject="
+            source: #portal-column-content::element;
+            target: #portal-column-content::element;
+            history: record;
+            scroll: top &&
+            source: head title;
+            target: head title;
+        "
+        data-pat-inject-bak="
             source: #portal-column-content::element;
             target: #portal-column-content::element;
             history: record;
