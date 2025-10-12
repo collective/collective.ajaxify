@@ -8,14 +8,21 @@ import "./js/base_url";
 registry.patterns.inject.trigger =
     `a[href^="${window.location.origin}"].pat-inject`
     + `,.pat-inject a[href^="${window.location.origin}"]`
+    // Don't inject files.
     + `:not([href$=pdf])`
     + `:not([href$=mp3])`
     + `:not([href$=wav])`
     + `:not([href$=jpg])`
     + `:not([href$=webp])`
     + `:not([href$=png])`
+    // Don't inject dropdown "buttons"
     + `:not(.dropdown-toggle)`
+    // Don't inject on the autotoc tab headings.
     + `:not([id^="autotoc"])`
+    // a.pat-inject is handled by the first selector.
+    + `:not(.pat-inject)`
+    // Stop global injection when explicitly asked. You cna still expliciltly
+    // set pat-inject on this elements.
     + `:not(.stop-pattern)`
 ;
 
