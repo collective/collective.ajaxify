@@ -1,0 +1,5 @@
+<metadata>
+  <dependencies>
+    <dependency>plone.patternslib:uninstall</dependency>
+  </dependencies>
+</metadata>

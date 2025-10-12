@@ -26,6 +26,7 @@ classifiers = [
 ]
 dependencies = [
     "Products.CMFPlone",
+    "plone.patternslib",
 ]
 
 [project.urls]
