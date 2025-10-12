@@ -6,8 +6,8 @@ from zope.interface import implementer
 
 @implementer(IMainTemplate)
 class MainTemplate(main_template.MainTemplate):
-    ajax_template_name = ViewPageTemplateFile("main_template_ajax.pt")
-    main_template_name = ViewPageTemplateFile("main_template.pt")
+    ajax_template = ViewPageTemplateFile("main_template_ajax.pt")
+    main_template = ViewPageTemplateFile("main_template.pt")
 
 
 class MainTemplateContent(MainTemplate):
