@@ -25,8 +25,9 @@
 <head>
     <meta charset="utf-8" />
 
-    <tal:ajaxhead condition="ajax_include_head">
     <div tal:replace="structure provider:plone.htmlhead" />
+
+    <tal:ajaxhead condition="ajax_include_head">
 
     <tal:comment replace="nothing">
         Various slots where you can insert elements in the header from a template.
