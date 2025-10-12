@@ -71,6 +71,7 @@
             target: head title &&
             source: #language_navigation::element;
             target: #language_navigation::element &&
+            source: head link[rel=canonical]::element;
             target: head link[rel=canonical]::element;
             remove-tags: ;
         "
