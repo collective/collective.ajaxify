@@ -1,7 +1,5 @@
-import $ from "jquery";
 import registry from "@patternslib/patternslib/src/core/registry";
 import "./js/base_url";
-//import "./js/pat-update";
 
 // Add a new trigger for the inject pattern.
 // NOTE: This is an important trigger, triggering all child anchors from the current domain!
