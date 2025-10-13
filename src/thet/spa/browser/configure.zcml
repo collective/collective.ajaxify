@@ -14,7 +14,7 @@
       class=".main_template.MainTemplate"
       allowed_interface="Products.CMFPlone.browser.interfaces.IMainTemplate"
       permission="zope.Public"
-      layer="..interfaces.IFrontendTheme"
+      layer="..interfaces.IBrowserLayer"
       />
 
   <browser:page
@@ -22,7 +22,7 @@
       for="*"
       class=".main_template.MainTemplateContent"
       permission="zope.Public"
-      layer="..interfaces.IFrontendTheme"
+      layer="..interfaces.IBrowserLayer"
       />
 
 </configure>

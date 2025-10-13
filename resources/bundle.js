@@ -4,23 +4,25 @@ import "./js/base_url";
 // Add a new trigger for the inject pattern.
 // NOTE: This is an important trigger, triggering all child anchors from the current domain!
 registry.patterns.inject.trigger =
-    `a[href^="${window.location.origin}"].pat-inject`
-    + `,.pat-inject a[href^="${window.location.origin}"]`
+    `.pat-inject a[href^="${window.location.origin}"]`
     // Don't inject files.
+    + `:not([href*=@@download])`
+    + `:not([href$=zip])`
     + `:not([href$=pdf])`
     + `:not([href$=mp3])`
     + `:not([href$=wav])`
     + `:not([href$=jpg])`
     + `:not([href$=webp])`
     + `:not([href$=png])`
+    + `:not([href$=txt])`
     // Don't inject dropdown "buttons"
     + `:not(.dropdown-toggle)`
     // Don't inject on the autotoc tab headings.
     + `:not([id^="autotoc"])`
-    // a.pat-inject is handled by the first selector.
+    // Don't handle explicitly set pat-inject elements.
     + `:not(.pat-inject)`
-    // Stop global injection when explicitly asked. You cna still expliciltly
-    // set pat-inject on this elements.
+    // Stop global injection when explicitly asked. You can still explicitly
+    // set pat-inject on these elements.
     + `:not(.stop-pattern)`
 ;
 

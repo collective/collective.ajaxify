@@ -1,17 +1,30 @@
-<configure xmlns="http://namespaces.zope.org/zope">
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    >
 
   <include package="plone.patternslib" />
-
-  <include file="configure-genericsetup.zcml" />
-
   <include package=".browser" />
-  <!--include package=".upgrades" /-->
 
-  <!-- Custom main template for non admin.* or cmf.* domains. -->
-  <subscriber
-      for="*
-           zope.traversing.interfaces.IBeforeTraverseEvent"
-      handler=".set_theme.set_theme"
-  />
+  <genericsetup:registerProfile
+      name="default"
+      title="thet.spa"
+      description="Installs the thet.spa add-on."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/default"
+      />
+
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="thet.spa (uninstall)"
+      description="Uninstalls the thet.spa add-on."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/uninstall"
+      />
+
+  <utility
+      factory=".setuphandlers.HiddenProfiles"
+      name="thet.spa-hiddenprofiles"
+      />
 
 </configure>
