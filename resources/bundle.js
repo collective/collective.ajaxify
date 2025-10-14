@@ -1,5 +1,4 @@
 import registry from "@patternslib/patternslib/src/core/registry";
-import "./base_url";
 
 // Add a new trigger for the inject pattern.
 // NOTE: This is an important trigger, triggering all child anchors from the current domain!
