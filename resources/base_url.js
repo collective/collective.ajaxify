@@ -17,7 +17,26 @@ class Pattern extends BasePattern {
     }
 
     set_base_url() {
-        document.body.dataset.baseUrl = window.location.href;
+        let url = window.location.href;
+
+        // Split the following words from the URL as we want to get the
+        // contents absolute URL.
+        const split_words = [
+            // NOTE: order matters.
+            "/@@", // also catches @@folder_contents and @@edit
+            "/++", // traversal urls.
+            "/folder_contents",
+            "/edit",
+            "/view",
+            "#",
+            "?",
+        ];
+
+        // Split all split words out of url
+        url = split_words.reduce((url_, split_) => url_.split(split_)[0], url);
+
+        // Set the contents absolute URL on `data-base-url`.
+        document.body.dataset.baseUrl = url;
     }
 }
 
