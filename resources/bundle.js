@@ -6,7 +6,7 @@ import "./base_url";
 registry.patterns.inject.trigger =
     `.pat-inject a[href^="${window.location.origin}"]`
     // Don't inject files.
-    + `:not([href*=@@download])`
+    + `:not([href*="@@download"])`
     + `:not([href$=zip])`
     + `:not([href$=pdf])`
     + `:not([href$=mp3])`
