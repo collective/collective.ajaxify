@@ -4,8 +4,8 @@ import registry from "@patternslib/patternslib/src/core/registry";
 import events from "@patternslib/patternslib/src/core/events";
 
 class Pattern extends BasePattern {
-    static name = "thet-base-url";
-    static trigger = ".pat-base-url";
+    static name = "pat-base-url";
+    static trigger = "body";
 
     init() {
         events.add_event_listener(
