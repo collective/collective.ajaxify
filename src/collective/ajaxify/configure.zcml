@@ -3,7 +3,6 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     >
 
-  <include package="plone.patternslib" />
   <include package=".browser" />
 
   <genericsetup:registerProfile
