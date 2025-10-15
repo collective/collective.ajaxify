@@ -4,8 +4,8 @@
     <value>True</value>
   </record>
 
-  <records prefix="plone.bundles/thet.spa" interface="Products.CMFPlone.interfaces.IBundleRegistry">
-    <value key="jscompilation">++resource++thet.spa/scripts/remote.min.js</value>
+  <records prefix="plone.bundles/collective.ajaxify" interface="Products.CMFPlone.interfaces.IBundleRegistry">
+    <value key="jscompilation">++resource++collective.ajaxify/scripts/remote.min.js</value>
     <value key="enabled">True</value>
     <value key="depends">plone</value>
     <value key="expression"></value>

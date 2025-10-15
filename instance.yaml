@@ -13,7 +13,7 @@ default_context:
 # TODO
 #    debug_mode: true
     debug_mode: false
-    zcml_package_includes: thet.spa
+    zcml_package_includes: collective.ajaxify
     db_storage: direct
     zcml_include_file_location: instance.zcml
 #    dos_protection_from_memory_limit: 1GB

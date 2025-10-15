@@ -1,2 +1,2 @@
-# thet.spa
+# collective.ajaxify
 

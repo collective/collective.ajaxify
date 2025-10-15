@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layers>
-  <layer interface="thet.spa.interfaces.IBrowserLayer"
-         name="thet.spa"
+  <layer interface="collective.ajaxify.interfaces.IBrowserLayer"
+         name="collective.ajaxify"
   />
 </layers>

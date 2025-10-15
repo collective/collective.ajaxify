@@ -4,7 +4,7 @@
     <value>False</value>
   </record>
 
-  <records prefix="plone.bundles/thet.spa"
+  <records prefix="plone.bundles/collective.ajaxify"
            interface="Products.CMFPlone.interfaces.IBundleRegistry"
            remove="True"
   />

@@ -19,7 +19,7 @@ module.exports = () => {
     });
     config.output.path = path.resolve(
         __dirname,
-        "src/thet/spa/browser/static/scripts/"
+        "src/collective/ajaxify/browser/static/scripts/"
     );
     config.plugins.push(
         mf_config({

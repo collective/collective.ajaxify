@@ -1,7 +1,7 @@
 [project]
-name = "thet.spa"
+name = "collective.ajaxify"
 version = "1.0.0"
-description = "single page application for Plone."
+description = "Ajaxify a ClassicUI Plone site."
 keywords = ["plone",]
 readme = "README.md"
 maintainers = [
@@ -30,8 +30,8 @@ dependencies = [
 ]
 
 [project.urls]
-Source = "https://git.bluedynamics.eu/programmatic/thet.spa"
-Issues = "https://git.bluedynamics.eu/programmatic/thet.spa/-/issues"
+Source = "https://github.com/collective/collective.ajaxify"
+Issues = "https://github.com/collective/collective.ajaxify/issues"
 
 [project.optional-dependencies]
 test = [
