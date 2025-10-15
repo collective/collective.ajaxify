@@ -3,8 +3,11 @@ import registry from "@patternslib/patternslib/src/core/registry";
 // Add a new trigger for the inject pattern.
 // NOTE: This is an important trigger, triggering all child anchors from the current domain!
 registry.patterns.inject.trigger =
-    `.pat-inject a[href^="${window.location.origin}"]`
-    // Don't inject files.
+    // All anchors with the pat-inject class.
+    `a.pat-inject`
+    // All anchors within `.pat-inject` from the same domain.
+    + `,.pat-inject a[href^="${window.location.origin}"]`
+    // Except files.
     + `:not([href*="@@download"])`
     + `:not([href$=zip])`
     + `:not([href$=pdf])`
