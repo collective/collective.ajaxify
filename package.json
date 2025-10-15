@@ -3,12 +3,14 @@
     "version": "1.0.0",
     "license": "GPL-2.0-only",
     "dependencies": {
-        "@patternslib/patternslib": "9.10.3",
-        "@plone/mockup": "5.4.4",
-        "@plone/plonetheme-barceloneta-base": "3.3.1"
+        "@plone/mockup": "https://github.com/plone/mockup.git#thet-improvements"
     },
     "devDependencies": {
-        "@patternslib/dev": "^3.8.1"
+        "@patternslib/dev": "^3.8.1",
+        "svelte": "^4.2.19",
+        "svelte-jester": "^3.0.0",
+        "svelte-loader": "^3.2.3",
+        "svelte-scrollto": "^0.2.0"
     },
     "scripts": {
         "build-webpack": "NODE_ENV=production webpack --config webpack.config.js",
