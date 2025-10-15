@@ -1,5 +1,9 @@
 <registry>
 
+  <record name="plone.use_ajax_main_template">
+    <value>True</value>
+  </record>
+
   <records prefix="plone.bundles/thet.spa" interface="Products.CMFPlone.interfaces.IBundleRegistry">
     <value key="jscompilation">++resource++thet.spa/scripts/remote.min.js</value>
     <value key="enabled">True</value>
