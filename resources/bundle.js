@@ -10,14 +10,14 @@ inject.trigger =
     + `,.pat-inject a[href^="${window.location.origin}"]`
     // Except files.
     + `:not([href*="@@download"])`
-    + `:not([href$=zip])`
-    + `:not([href$=pdf])`
-    + `:not([href$=mp3])`
-    + `:not([href$=wav])`
     + `:not([href$=jpg])`
-    + `:not([href$=webp])`
+    + `:not([href$=mp3])`
+    + `:not([href$=pdf])`
     + `:not([href$=png])`
     + `:not([href$=txt])`
+    + `:not([href$=wav])`
+    + `:not([href$=webp])`
+    + `:not([href$=zip])`
     // Don't inject dropdown "buttons"
     + `:not(.dropdown-toggle)`
     // Don't inject on the autotoc tab headings.
