@@ -15,7 +15,6 @@ codespell_skip = "*.css,*.js,*.map,*.svg,yarn.lock,*.json,*.xml"
 [github]
 jobs = [
    "qa",
-   "coverage",
    "release_ready",
    "circular",
 ]
