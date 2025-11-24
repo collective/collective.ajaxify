@@ -1,4 +1,6 @@
-<metal:page define-macro="master">
+<metal:page define-macro="master"
+            i18n:ignore=""
+>
   <tal:doctype tal:replace="structure string:&lt;!DOCTYPE html&gt;" />
   <!--! TODO: `tal:define="site portal_state/site;", which just uses
   zope.component.hooks.getSite() to get the navigation root.

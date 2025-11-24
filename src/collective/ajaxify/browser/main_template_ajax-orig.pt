@@ -1,4 +1,6 @@
-<metal:page define-macro="master">
+<metal:page define-macro="master"
+            i18n:ignore=""
+>
   <tal:doctype tal:replace="structure string:&lt;!DOCTYPE html&gt;" />
   <html xmlns="http://www.w3.org/1999/xhtml"
         xmlns:metal="http://xml.zope.org/namespaces/metal"

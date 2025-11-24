@@ -11,3 +11,11 @@ test_matrix = {"6.2" = ["3.13", "3.10"], "6.1" = ["3.13", "3.10"]}
 [pyproject]
 codespell_skip = "*.css,*.js,*.map,*.svg,yarn.lock,*.json,*.xml"
 # codespell_ignores = "titel,produkt,adresse,plattform,plattforms"
+
+[github]
+jobs = [
+   "qa",
+   "coverage",
+   "release_ready",
+   "circular",
+]
