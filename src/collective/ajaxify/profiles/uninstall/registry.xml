@@ -1,9 +1,5 @@
 <registry>
 
-  <record name="plone.use_ajax_main_template">
-    <value>False</value>
-  </record>
-
   <records prefix="plone.bundles/collective.ajaxify"
            interface="Products.CMFPlone.interfaces.IBundleRegistry"
            remove="True"
