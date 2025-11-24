@@ -3,16 +3,15 @@
   <!--! TODO: `tal:define="site portal_state/site;", which just uses
   zope.component.hooks.getSite() to get the navigation root.
   the navigation menu is rendered on that context. -->
-  <html
-    lang="${lang}"
-    tal:define="
-        portal_state python:context.restrictedTraverse('@@plone_portal_state');
-        context_state python:context.restrictedTraverse('@@plone_context_state');
-        site portal_state/portal;
-        portal_url portal_state/portal_url;
-        anon portal_state/anonymous;
-        lang python:portal_state.language();
-    "
+  <html lang="${lang}"
+        tal:define="
+          portal_state python:context.restrictedTraverse('@@plone_portal_state');
+          context_state python:context.restrictedTraverse('@@plone_context_state');
+          site portal_state/portal;
+          portal_url portal_state/portal_url;
+          anon portal_state/anonymous;
+          lang python:portal_state.language();
+        "
   >
     <head>
       <meta charset="utf-8" />
@@ -33,7 +32,9 @@
       </script>
       <tal:component replace="structure context/@@plone.app.standardtiles.javascripts" />
 
-      <link rel="canonical" href="${context_state/canonical_object_url}" />
+      <link href="${context_state/canonical_object_url}"
+            rel="canonical"
+      />
       <link href="${portal_url}/++resource++adm.sfd.site-static/styles/styles.css?v4"
             rel="stylesheet"
       />
@@ -51,303 +52,136 @@
       />
     </head>
     <metal:cache tal:replace="structure provider:plone.httpheaders" />
-    <body
-      class="
-          tw:duration-300
-          tw:font-[Arial,sans-serif]
-          pat-base-url
-          @container
-          ${python:'anon' if anon else ''}
-      "
-      data-pat-inject="
+    <body class="tw:duration-300 tw:font-[Arial,sans-serif] pat-base-url @container ${python:'anon' if anon else ''}"
+          data-base-url="${context/absolute_url}"
+          data-pat-inject="
           source: main::element;
           target: main::element;
           history: record;
-          scroll: top &&
+          scroll: top &amp;&amp;
           source: head title;
-          target: head title &&
+          target: head title &amp;&amp;
           source: #language_navigation::element;
-          target: #language_navigation::element &&
+          target: #language_navigation::element &amp;&amp;
           source: head link[rel=canonical]::element;
           target: head link[rel=canonical]::element;
           remove-tags: ;
       "
-      data-base-url="${context/absolute_url}"
-      data-portal-url="${portal_url}"
+          data-portal-url="${portal_url}"
     >
-      <section
-        class="
-            sfd-wrapper
+      <section class="sfd-wrapper tw:max-w-5xl tw:grid tw:grid-cols-1 tw:@lg:grid-cols-(--tw-grid-cols-main) tw:@lg:desktop-editor ${python:'anon' if anon else ''}">
+        <header class="sfd-header tw:mb-4 tw:row-start-2 tw:@lg:row-start-1 tw:@lg:col-span-2 tw:@lg:mb-10 tw:flex tw:flex-row tw:gap-6 tw:items-center">
 
-            tw:max-w-5xl
-
-            tw:grid
-            tw:grid-cols-1
-            tw:@lg:grid-cols-(--tw-grid-cols-main)
-
-            tw:@lg:desktop-editor
-            ${python:'anon' if anon else ''}
-        "
-
-      >
-      <header
-        class="
-            sfd-header
-            tw:mb-4
-            tw:row-start-2
-            tw:@lg:row-start-1
-            tw:@lg:col-span-2
-            tw:@lg:mb-10
-
-            tw:flex
-            tw:flex-row
-            tw:gap-6
-            tw:items-center
-        "
-      >
-
-        <a
-          class="
-            sfd-logo
-            pat-inject
-            tw:mt-4
-            tw:mb-4
-            tw:z-50
-          "
-          href="${portal_url}"
-          data-pat-inject="
+          <a class="sfd-logo pat-inject tw:mt-4 tw:mb-4 tw:z-50"
+             href="${portal_url}"
+             data-pat-inject="
               remove-tags: ;
           "
-        >
-          <figure
-            class="
-                tw:align-bottom
-                tw:flex
-                tw:flex-col
-                tw:gap-4
-                tw:@lg:flex-row
-                tw:@lg:items-center
-                tw:@lg:gap-2
-            "
           >
-            <picture
-              class="
-                  tw:w-28
-                  tw:@lg:w-32
-              "
-            >
-              <tal:rep replace="structure site/@@site-logo" />
-            </picture>
-            <p
-              class="
-                  tw:text-xl
-                  tw:text-nowrap
-                  tw:leading-none
-                  tw:hidden
-                  tw:@lg:block
-                  tw:@lg:mx-4
-                  tw:@lg:-mb-2
-                "
-              >
-              <strong>schule f&uuml;r dichtung</strong><br />
+            <figure class="tw:align-bottom tw:flex tw:flex-col tw:gap-4 tw:@lg:flex-row tw:@lg:items-center tw:@lg:gap-2">
+              <picture class="tw:w-28 tw:@lg:w-32">
+                <tal:rep replace="structure site/@@site-logo" />
+              </picture>
+              <p class="tw:text-xl tw:text-nowrap tw:leading-none tw:hidden tw:@lg:block tw:@lg:mx-4 tw:@lg:-mb-2">
+                <strong>schule f&uuml;r dichtung</strong><br />
               vienna poetry school
-            </p>
-          </figure>
-        </a>
+              </p>
+            </figure>
+          </a>
 
-        <div class="
-            tw:ml-auto
-
-            tw:hidden
-
-            tw:flex
-            tw:flex-row
-            tw:flex-wrap
-            tw:gap-2
-            tw:items-center
-            tw:z-50
-
-            tw:@lg:block
-        ">
-          <!--!tal:component replace="structure context/@@sfd-tile-search" /-->
-          <!--!tal:component replace="structure context/@@sfd-tile-menu-user" /-->
-        </div>
-
-      </header>
-
-      <!-- main navigation -->
-      <div
-        class="
-            tw:row-start-1
-            tw:@lg:row-start-2
-            tw:col-start-1
-        "
-      >
-        <details
-          class="
-              main_navigation
-              main_navigation__wrapper
-              pat-details-navigation
-              tw:p-4
-              tw:text-2xl
-              tw:text-(--tw-color-sfd-grey)
-              tw:absolute
-              tw:@lg:pr-4
-              tw:@lg:text-auto
-              tw:@max-lg:dialog--full
-              tw:@lg:sticky
-              tw:@lg:top-8
-          "
-          data-pat-details-navigation="
-              breakpoint: 512;
-          "
-        >
-          <summary
-            class="
-                tw:fixed
-                tw:top-4
-                tw:almost-right
-                tw:@lg:hidden
-            "
-            title="main navigation"
-            i18n:attributes="title"
-          >
-            <!--!tal:svg replace="structure context/@@sfd-icon-burger" /-->
-          </summary>
-
-          <!--!tal:nav replace="structure context/@@sfd-tile-languageselector" /-->
-          <nav
-            id="main_navigation"
-            class="
-                tw:font-bold
-                pat-inject
-            "
-            data-pat-inject="
-                remove-tags: ;
-            "
-          >
-            <!--!tal:nav replace="structure site/@@sfd-tile-menu-main" /-->
-          </nav>
-
-          <div class="
-              tw:flex
-              tw:flex-col
-              tw:flex-wrap
-              tw:gap-4
-              tw:z-50
-
-              tw:border-t-2
-              tw:border-b-2
-              tw:border-white
-              tw:my-6
-              tw:py-6
-
-              tw:text-lg
-
-              tw:@lg:hidden
-          ">
+          <div class="tw:ml-auto tw:hidden tw:flex tw:flex-row tw:flex-wrap tw:gap-2 tw:items-center tw:z-50 tw:@lg:block">
             <!--!tal:component replace="structure context/@@sfd-tile-search" /-->
             <!--!tal:component replace="structure context/@@sfd-tile-menu-user" /-->
           </div>
 
-          <nav class="
-            social-media
-            tw:flex
-            tw:flex-row
-            tw:gap-4
-            tw:mt-4
-            tw:plain
-          ">
-            <a href="https://www.facebook.com/poetryschool">
-              <!--!tal:svg replace="structure context/@@sfd-icon-facebook/6" /-->
-            </a>
-            <a href="https://www.instagram.com/vienna_poetry_school">
-              <!--!tal:svg replace="structure context/@@sfd-icon-instagram/6" /-->
-            </a>
-          </nav>
+        </header>
 
-        </details>
-      </div>
+        <!-- main navigation -->
+        <div class="tw:row-start-1 tw:@lg:row-start-2 tw:col-start-1">
+          <details class="main_navigation main_navigation__wrapper pat-details-navigation tw:p-4 tw:text-2xl tw:text-(--tw-color-sfd-grey) tw:absolute tw:@lg:pr-4 tw:@lg:text-auto tw:@max-lg:dialog--full tw:@lg:sticky tw:@lg:top-8"
+                   data-pat-details-navigation="
+              breakpoint: 512;
+          "
+          >
+            <summary class="tw:fixed tw:top-4 tw:almost-right tw:@lg:hidden"
+                     title="main navigation"
+                     i18n:attributes="title"
+            >
+              <!--!tal:svg replace="structure context/@@sfd-icon-burger" /-->
+            </summary>
 
-      <!-- main content -->
-      <!--! The main content uses the `main_template_ajax.pt` template.
+            <!--!tal:nav replace="structure context/@@sfd-tile-languageselector" /-->
+            <nav class="tw:font-bold pat-inject"
+                 id="main_navigation"
+                 data-pat-inject="
+                remove-tags: ;
+            "
+            >
+              <!--!tal:nav replace="structure site/@@sfd-tile-menu-main" /-->
+            </nav>
+
+            <div class="tw:flex tw:flex-col tw:flex-wrap tw:gap-4 tw:z-50 tw:border-t-2 tw:border-b-2 tw:border-white tw:my-6 tw:py-6 tw:text-lg tw:@lg:hidden">
+              <!--!tal:component replace="structure context/@@sfd-tile-search" /-->
+              <!--!tal:component replace="structure context/@@sfd-tile-menu-user" /-->
+            </div>
+
+            <nav class="social-media tw:flex tw:flex-row tw:gap-4 tw:mt-4 tw:plain">
+              <a href="https://www.facebook.com/poetryschool">
+                <!--!tal:svg replace="structure context/@@sfd-icon-facebook/6" /-->
+              </a>
+              <a href="https://www.instagram.com/vienna_poetry_school">
+                <!--!tal:svg replace="structure context/@@sfd-icon-instagram/6" /-->
+              </a>
+            </nav>
+
+          </details>
+        </div>
+
+        <!-- main content -->
+        <!--! The main content uses the `main_template_ajax.pt` template.
       Further interactions are normally done via AJAX loading, which will all
       use the main_template_ajax.pt template and inject the content instead of
       reloading the whole page.
       -->
-      <metal:block define-slot="content">
-      <metal:content metal:define-macro="content">
-      <main metal:use-macro="context/@@main_template_content/macros/master"></main>
-      </metal:content>
-      </metal:block>
+        <metal:block define-slot="content">
+          <metal:content metal:define-macro="content">
+            <main metal:use-macro="context/@@main_template_content/macros/master"></main>
+          </metal:content>
+        </metal:block>
 
-      <footer
-        class="
-            tw:row-auto
-            tw:col-start-1
-            tw:@lg:row-start-3
-            tw:@lg:col-span-2
-            tw:text-xs
-            tw:text-center
-            tw:p-4
-            tw:pt-8
-        "
-        id="footer"
-      >
-          schule für dichtung in wien - vienna poetry school - mariahilfer str. 88a/III/7 - a-1070 wien
-      </footer>
+        <footer class="tw:row-auto tw:col-start-1 tw:@lg:row-start-3 tw:@lg:col-span-2 tw:text-xs tw:text-center tw:p-4 tw:pt-8"
+                id="footer"
+        >
+          schule f&uuml;r dichtung in wien - vienna poetry school - mariahilfer str. 88a/III/7 - a-1070 wien
+        </footer>
       </section>
 
       <!--! eventual toolbar -->
-      <details
-        class="
-            toolbar-navigation
-            toolbar-navigation__wrapper
-            pat-details-navigation
-            tw:text-xs
-            tw:@max-lg:dialog--full
-            tw:@lg:top-0
-            tw:@lg:right-0
-
-            tw:text-base
-        "
-        data-pat-details-navigation="
+      <details class="toolbar-navigation toolbar-navigation__wrapper pat-details-navigation tw:text-xs tw:@max-lg:dialog--full tw:@lg:top-0 tw:@lg:right-0 tw:text-base"
+               id="toolbar"
+               data-pat-details-navigation="
             breakpoint: 512;
         "
-        id="toolbar"
-        tal:condition="not: anon"
+               tal:condition="not: anon"
       >
-        <summary
-          class="
-              tw:fixed
-              tw:top-14
-              tw:almost-right
-              tw:@lg:hidden
-              tw:@lg:relative
-              tw:@lg:top-auto
-              @lg:right-auto
-          "
-          title="toolbar"
-          i18n:attributes="title"
+        <summary class="tw:fixed tw:top-14 tw:almost-right tw:@lg:hidden tw:@lg:relative tw:@lg:top-auto @lg:right-auto"
+                 title="toolbar"
+                 i18n:attributes="title"
         >
           <!--!tal:svg replace="structure context/@@sfd-icon-pen" /-->
         </summary>
 
-        <aside
-          class="
-              pat-update
-              tw:@lg:fixed-toolbar
-          "
-          data-pat-update="
-              event: pat-toolbar--reloaded;
-              scan-patterns: inject;
-          "
-          data-pat-inject="
+        <aside class="pat-update tw:@lg:fixed-toolbar"
+               data-pat-inject="
               source: body;
               target: self::element;
               trigger: autoload;
               history: none;
               remove-tags: ;
+          "
+               data-pat-update="
+              event: pat-toolbar--reloaded;
+              scan-patterns: inject;
           "
         >
 
@@ -360,7 +194,7 @@
       </details>
 
 
-      <tal:debug replace="structure context/@@plone.app.debugtoolbar.toolbar|nothing"/>
+      <tal:debug replace="structure context/@@plone.app.debugtoolbar.toolbar|nothing" />
     </body>
   </html>
 </metal:page>

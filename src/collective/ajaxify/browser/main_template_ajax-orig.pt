@@ -16,76 +16,65 @@
   >
     <head>
       <title>${context/title} - ${site/title}</title>
-      <link rel="canonical" href="${context_state/canonical_object_url}" />
+      <link href="${context_state/canonical_object_url}"
+            rel="canonical"
+      />
     </head>
     <body>
 
       <tal:nav replace="structure context/@@sfd-tile-languageselector" />
 
       <section id="global_statusmessage">
-        <tal:message tal:content="structure provider:plone.globalstatusmessage"/>
+        <tal:message tal:content="structure provider:plone.globalstatusmessage" />
         <div metal:define-slot="global_statusmessage">
         </div>
       </section>
 
-      <main
-          class="
-              tw:col-start-1
-              tw:row-start-3
-              tw:@lg:col-start-2
-              tw:@lg:row-start-2
-              ${python:'anon' if anon else ''}
-              tw:mt-8
-              tw:p-4
-              pat-inject
-              pat-gallery
-              view--${view/__name__}
-          "
-          data-pat-inject="
+      <main class="tw:col-start-1 tw:row-start-3 tw:@lg:col-start-2 tw:@lg:row-start-2 ${python:'anon' if anon else ''} tw:mt-8 tw:p-4 pat-inject pat-gallery view--${view/__name__}"
+            data-pat-gallery="item-selector: a.gallery-item;"
+            data-pat-inject="
               remove-tags: ;
           "
-          data-pat-gallery="item-selector: a.gallery-item;"
       >
 
         <metal:block define-slot="content">
           <metal:content metal:define-macro="content">
             <metal:slot define-slot="body">
 
-                <metal:main define-slot="main">
+              <metal:main define-slot="main">
 
-                  <tal:component replace="structure context/@@sfd-tile-pathbar" />
+                <tal:component replace="structure context/@@sfd-tile-pathbar" />
 
-                  <tal:component replace="structure context/@@content-header" />
+                <tal:component replace="structure context/@@content-header" />
 
-                  <!--! Only show byline in history view. -->
-                  <a class="pat-inject"
-                     href="${context/absolute_url}/@@plone.app.standardtiles.document_byline"
-                     data-pat-inject="source:body; target:self::element; trigger:autoload; history: none"
-                     tal:condition="python:view.__name__ == 'historyview'"
-                  >
+                <!--! Only show byline in history view. -->
+                <a class="pat-inject"
+                   href="${context/absolute_url}/@@plone.app.standardtiles.document_byline"
+                   data-pat-inject="source:body; target:self::element; trigger:autoload; history: none"
+                   tal:condition="python:view.__name__ == 'historyview'"
+                >
                     document metadata
-                  </a>
+                </a>
 
-                  <metal:content-core define-slot="content-core"
-                                      tal:content="nothing"
-                  >
+                <metal:content-core define-slot="content-core"
+                                    tal:content="nothing"
+                >
                     Page body text
-                  </metal:content-core>
-                </metal:main>
+                </metal:content-core>
+              </metal:main>
 
-                <tal:component replace="structure context/@@sfd-tile-gallery|nothing" />
-                <tal:component replace="structure context/@@sfd-tile-include-html|nothing" />
-                <tal:component replace="structure context/@@sfd-tile-comments|nothing" />
-                <tal:component replace="structure context/@@collective.localstyles.styleincluder|nothing" />
+              <tal:component replace="structure context/@@sfd-tile-gallery|nothing" />
+              <tal:component replace="structure context/@@sfd-tile-include-html|nothing" />
+              <tal:component replace="structure context/@@sfd-tile-comments|nothing" />
+              <tal:component replace="structure context/@@collective.localstyles.styleincluder|nothing" />
 
-                <tal:batchnavigation
-                    define="
-                        batch view/batch|nothing;
-                        batchnavigation nocall:context/@@batchnavigation;
-                    "
-                    replace="structure python:batchnavigation(batch)"
-                    condition="batch"
-                    />
+              <tal:batchnavigation define="
+                                     batch view/batch|nothing;
+                                     batchnavigation nocall:context/@@batchnavigation;
+                                   "
+                                   condition="batch"
+                                   replace="structure python:batchnavigation(batch)"
+              />
 
             </metal:slot>
           </metal:content>

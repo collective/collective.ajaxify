@@ -20,5 +20,5 @@ def post_install(context):
     try:
         registry["plone.use_ajax_main_template"] = False
     except KeyError:
-        # Plone 6.1 compatibilty
+        # Plone 6.1 compatibility
         pass

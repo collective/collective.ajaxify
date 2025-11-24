@@ -369,7 +369,7 @@ endif
 # depending on the PYTHON_PACKAGE_INSTALLER and UV_AVAILABLE
 # - both vars can be false or
 # - one of them can be true,
-# - but never boths.
+# - but never both.
 USE_GLOBAL_UV:=$(shell [[ "$(PYTHON_PACKAGE_INSTALLER)" == "uv" && "$(UV_AVAILABLE)" == "true" ]] && echo "true" || echo "false")
 USE_LOCAL_UV:=$(shell [[ "$(PYTHON_PACKAGE_INSTALLER)" == "uv" && "$(UV_AVAILABLE)" == "false" ]] && echo "true" || echo "false")
 
