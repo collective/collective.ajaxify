@@ -22,6 +22,8 @@ inject.trigger =
     + `:not(.dropdown-toggle)`
     // Don't inject on the autotoc tab headings.
     + `:not([id^="autotoc"])`
+    // Don't inject on modal links.
+    + `:not(.pat-plone-modal, .pat-modal)`
     // Don't handle explicitly set pat-inject elements.
     + `:not(.pat-inject)`
     // Stop global injection when explicitly asked. You can still explicitly
