@@ -1,13 +1,13 @@
+from plone.memoize.view import memoize
 from Products.CMFPlone.browser import main_template
 from Products.CMFPlone.browser.interfaces import IMainTemplate
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.interface import implementer
-from plone.memoize.view import memoize
 
 
 @implementer(IMainTemplate)
 class MainTemplate(main_template.MainTemplate):
-    """ reimplementation of 6.2 main_template logic for Plone 6.1 """
+    """reimplementation of 6.2 main_template logic for Plone 6.1"""
 
     ajax_template = ViewPageTemplateFile("main_template_ajax.pt")
     main_template = ViewPageTemplateFile("main_template.pt")
