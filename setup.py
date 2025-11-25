@@ -11,7 +11,7 @@ long_description = "\n".join(
 setup(
     name="collective.ajaxify",
     version=version,
-    description="collective.ajaxify is a RESTful hypermedia API for Plone.",
+    description="collective.ajaxify is for asynchronous Classic-UI navigation using pat-inject.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     # Get more strings from
