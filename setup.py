@@ -44,7 +44,16 @@ setup(
         "setuptools",
         "Products.CMFPlone>=6.1",
     ],
-    extras_require={"test": []},
+    extras_require={
+        "test": [
+            "plone.app.testing",
+            "plone.browserlayer",
+            "plone.testing>=5.0.0",
+            "plone.restapi[test]",
+            "plone.app.robotframework",
+            "robotsuite",
+        ],
+    },
     entry_points="""
       # -*- Entry points: -*-
       [z3c.autoinclude.plugin]

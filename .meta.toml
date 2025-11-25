@@ -18,3 +18,9 @@ jobs = [
    "release_ready",
    "circular",
 ]
+
+[gitignore]
+extra_lines = """
+/robot_*
+/test_*
+"""
