@@ -10,16 +10,14 @@ default_context:
     wsgi_fast_listen: 0.0.0.0:8080
     initial_user_name: admin
     initial_user_password: admin
-# TODO
-#    debug_mode: true
-    debug_mode: false
-    zcml_package_includes: collective.ajaxify
-    db_storage: direct
-    zcml_include_file_location: instance.zcml
-#    dos_protection_from_memory_limit: 1GB
+    debug_mode: true
     environment: {
         "zope_i18n_compile_mo_files": "true",
         "CHAMELEON_CACHE": "{{ cookiecutter.location_clienthome }}/cache",
-#        "CHAMELEON_RELOAD": "true",
-#        "CHAMELEON_DEBUG": "true"
+        "CHAMELEON_RELOAD": "true",
+        "CHAMELEON_DEBUG": "true"
     }
+# Plone 6.2
+#    zcml_package_metas: ['Products.CMFPlone']
+#    zcml_package_includes: ['Products.CMFPlone']
+#    zcml_package_overrides: ['Products.CMFPlone']
