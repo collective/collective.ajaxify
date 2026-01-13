@@ -3,7 +3,7 @@ from setuptools import setup
 import pathlib
 
 
-version = "1.0.0.dev0"
+version = "1.0.0"
 long_description = "\n".join(
     [pathlib.Path(filename).read_text() for filename in ("README.md", "CHANGES.md")]
 )
