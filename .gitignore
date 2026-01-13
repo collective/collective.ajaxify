@@ -41,7 +41,8 @@ local.cfg
 
 # mxdev
 /instance/
-/.make-sentinels/
+/.mxdev_cache/
+/.mxmake/
 /*-mxdev.txt
 /reports/
 /sources/
