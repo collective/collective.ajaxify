@@ -17,7 +17,7 @@ setup(
     # Get more strings from
     # https://pypi.org/classifiers/
     classifiers=[
-        "Development Status :: 2 - Pre-Alpha",
+        "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",
         "Framework :: Plone",
         "Framework :: Plone :: 6.1",
@@ -32,9 +32,9 @@ setup(
         "Programming Language :: Python :: 3 :: Only",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    keywords="plone classicui pat-ajax patternslib",
+    keywords="plone classicui ajax pat-inject patternslib mockup",
     author="Johannes Raggam",
-    author_email="thet@syslab.org",
+    author_email="thetetet@gmail.com",
     url="https://github.com/collective/collective.ajaxify/",
     license="gpl",
     python_requires=">=3.10",
