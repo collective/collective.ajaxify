@@ -1,17 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
 <registry>
 
-  <record name="plone.use_ajax_main_template">
-    <value>True</value>
-  </record>
-
-  <records prefix="plone.bundles/collective.ajaxify" interface="Products.CMFPlone.interfaces.IBundleRegistry">
+  <records interface="Products.CMFPlone.interfaces.IBundleRegistry"
+           prefix="plone.bundles/collective.ajaxify"
+  >
     <value key="jscompilation">++resource++collective.ajaxify/scripts/collective-ajaxify.bundle.min.js</value>
     <value key="enabled">True</value>
-    <value key="depends"></value>
-    <value key="expression"></value>
+    <value key="depends" />
+    <value key="expression" />
   </records>
 
-  <records prefix="plone.bundles/plone" interface="Products.CMFPlone.interfaces.IBundleRegistry">
+  <records interface="Products.CMFPlone.interfaces.IBundleRegistry"
+           prefix="plone.bundles/plone"
+  >
     <value key="jscompilation">++resource++collective.ajaxify/scripts/remote.min.js</value>
     <value key="depends">collective.ajaxify</value>
   </records>
