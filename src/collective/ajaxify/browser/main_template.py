@@ -22,13 +22,24 @@ class MainTemplate(main_template.MainTemplate):
             # Plone 6.2 has "use_ajax" factory.
             return super().use_ajax
         except AttributeError:
+            # From here on: Plone 6.1
             pass
+
+        # Backport from Products.CMFPlone 6.2 main_template.py
 
         if "ajax_load" in self.request:
             return bool(self.request.get("ajax_load", False))
 
-        # defaults to False
-        return False
+        is_ajax = self.request.get("HTTP_X_REQUESTED_WITH") == "XMLHttpRequest"
+        if not is_ajax:
+            # Not an ajax request. Use the normal main template.
+            return False
+
+        # ajax case.
+        # defaults to True - we're in Plone 6.1 and want to make use of the
+        # ajax main template. In 6.2 the automatic usage of the ajax main
+        # template is configurable.
+        return True
 
     @property
     def template(self):
