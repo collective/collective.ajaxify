@@ -30,8 +30,10 @@ Johannes Raggam:
 This package depends on features from Plone 6.2 and provides backports for
 Plone 6.1.
 
-## Installation
+## Running this package
 
 ```bash
 make zope-start
 ```
+
+Then install at: http://localhost:8080/Plone/prefs_install_products_form
